@@ -1,18 +1,23 @@
 // == Import npm
 import React from 'react';
-import { Provider } from 'react-redux';
+
+// == Import Components
+import Header from 'src/components/Header';
+import Search from 'src/components/Search';
+import Map from 'src/components/Map';
+import Footer from 'src/components/Footer';
 
 // == Import
-import store from 'src/store';
 import './app.scss';
 
 // == Composant
 const App = () => (
-  <Provider store={store}>
-    <div className="app">
-      <h1>Composant : App</h1>
-    </div>
-  </Provider>
+  <>
+    <Header />
+    <Search />
+    <Map />
+    <Footer />
+  </>
 );
 
 // == Export
