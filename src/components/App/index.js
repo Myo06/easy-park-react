@@ -3,7 +3,7 @@ import React from 'react';
 
 // == Import Components
 import Header from 'src/components/Header';
-import Search from 'src/components/Search';
+import Search from 'src/containers/Search';
 import Map from 'src/components/Map';
 import Footer from 'src/components/Footer';
 
