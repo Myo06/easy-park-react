@@ -13,7 +13,7 @@ import Search from 'src/components/Search';
 const mapStateToProps = (state) => ({
   searchInput: state.searchInput,
   searchInputError: state.searchInputError,
-  searchInputIsFocussed: state.searchInputIsFocussed,
+  searchInputIsActived: state.searchInputIsActived,
   searchInputIsLocked: state.searchInputIsLocked,
 });
 

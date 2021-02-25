@@ -13,7 +13,7 @@ const Search = ({
   handleOnChangeSearchInput,
   handleOnBlurSearchInput,
   searchInputError,
-  searchInputIsFocussed,
+  searchInputIsActived,
   searchInputIsLocked,
 }) => {
 
@@ -52,8 +52,8 @@ Search.propTypes = {
   handleOnBlurSearchInput: PropTypes.func.isRequired,
   // if the search parking failled contain the error message
   searchInputError: PropTypes.string.isRequired,
-  // if the search input is focussed
-  searchInputIsFocussed: PropTypes.bool.isRequired,
+  // if the search input is on focus
+  searchInputIsActived: PropTypes.bool.isRequired,
   // remains locked for the data loading
   searchInputIsLocked: PropTypes.bool.isRequired,
 };
