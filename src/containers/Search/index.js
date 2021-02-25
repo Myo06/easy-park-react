@@ -12,6 +12,9 @@ import Search from 'src/components/Search';
 // === mapStateToProps
 const mapStateToProps = (state) => ({
   searchInput: state.searchInput,
+  searchInputError: state.searchInputError,
+  searchInputIsFocussed: state.searchInputIsFocussed,
+  searchInputIsLocked: state.searchInputIsLocked,
 });
 
 // === mapDispatchToProps

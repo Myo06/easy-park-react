@@ -1,0 +1,23 @@
+@use 'src/styles/vars';
+
+.header {
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  padding: vars.$gutter;
+  margin-bottom: vars.$gutter;
+  background-color: vars.$secondary;
+  box-shadow: 1px 1px 5px vars.$primary;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: vars.$primary;
+  .header__logo {
+    width: 45px;
+  }
+  .header__titles {
+    padding: vars.$gutter;
+    .titles__name {
+      margin-bottom: vars.$gutter / 2 ;
+    }
+  }
+}

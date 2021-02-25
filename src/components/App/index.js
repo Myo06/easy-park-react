@@ -12,12 +12,12 @@ import './app.scss';
 
 // == Composant
 const App = () => (
-  <>
+  <div className="app">
     <Header />
     <Search />
     <Map />
     <Footer />
-  </>
+  </div>
 );
 
 // == Export

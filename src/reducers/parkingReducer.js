@@ -2,6 +2,9 @@ import { SET_SEARCH_INPUT } from 'src/actions/parking';
 
 const initialState = {
   searchInput: '',
+  searchInputError: '',
+  searchInputIsFocussed: false,
+  searchInputIsLocked: false,
 };
 
 function parkingReducer(state = initialState, action = {}) {
