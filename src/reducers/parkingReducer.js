@@ -1,10 +1,13 @@
-import { SET_SEARCH_INPUT } from 'src/actions/parking';
+import { 
+  SET_SEARCH_INPUT,
+  TOGGLE_FIELD,
+} from 'src/actions/parking';
 
 const initialState = {
   searchInput: '',
-  searchInputError: '',
-  searchInputIsFocussed: false,
-  searchInputIsLocked: false,
+  searchFieldError: '',
+  searchFieldIsActived: false,
+  searchFieldIsLocked: false,
 };
 
 function parkingReducer(state = initialState, action = {}) {
@@ -13,6 +16,11 @@ function parkingReducer(state = initialState, action = {}) {
       return {
         ...state,
         searchInput: action.searchInputValue,
+      };
+    case TOGGLE_FIELD:
+      return {
+        ...state,
+        searchFieldIsActived: action.newValue,
       };
 
     default:

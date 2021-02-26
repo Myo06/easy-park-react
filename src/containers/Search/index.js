@@ -1,26 +1,31 @@
 import { connect } from 'react-redux';
 
 // === actions
-import { 
+import {
   setSearchInput,
-  fetchParkings,
+  toggleField,
 } from 'src/actions/parking';
+
+import {
+  fetchParkings,
+} from 'src/actions/googleMap';
 
 // === presentational component
 import Search from 'src/components/Search';
 
 // === mapStateToProps
 const mapStateToProps = (state) => ({
-  searchInput: state.searchInput,
-  searchInputError: state.searchInputError,
-  searchInputIsActived: state.searchInputIsActived,
-  searchInputIsLocked: state.searchInputIsLocked,
+  searchInput: state.parking.searchInput,
+  searchFieldError: state.parking.searchFieldError,
+  searchFieldIsActived: state.parking.searchFieldIsActived,
+  searchFieldIsLocked: state.parking.searchFieldIsLocked,
 });
 
 // === mapDispatchToProps
 const mapDispatchToProps = (dispatch) => ({
   handleOnChangeSearchInput: (searchInputValue) => dispatch(setSearchInput(searchInputValue)),
-  handleOnBlurSearchInput: (query) => dispatch(fetchParkings(query)),
+  handleOnValidateSearchInput: () => dispatch(fetchParkings()),
+  handleOnFocusSearchInput: (toTrue) => dispatch(toggleField(toTrue)),
 });
 
 // === création de l'assistant
