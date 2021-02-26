@@ -1,3 +1,6 @@
+// === import npm
+import axios from 'axios';
+
 // === actions
 import {
   FETCH_PARKINGS,
@@ -11,8 +14,26 @@ import {
 const googleMapMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_PARKINGS: {
-      store.dispatch(toggleField(false));
-      store.dispatch(setSearchInput(''));
+      const {
+        map,
+        maps,
+      } = store.getState().googleMap;
+
+
+      const request = {
+        query: store.getState().parking.searchInput,
+        types: ['parking'],
+      };
+
+      const callback = (results, status) => {
+        console.log(results);
+        store.dispatch(toggleField(false));
+        store.dispatch(setSearchInput(''));
+      };
+
+      const searchResult = new maps.places.PlacesService(map);
+      searchResult.textSearch(request, callback);
+
       next(action);
       break;
     }
