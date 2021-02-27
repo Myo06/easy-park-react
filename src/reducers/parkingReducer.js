@@ -1,6 +1,7 @@
-import { 
+import {
   SET_SEARCH_INPUT,
   TOGGLE_FIELD,
+  SET_SEARCH_FIELD_ERROR,
 } from 'src/actions/parking';
 
 const initialState = {
@@ -21,6 +22,12 @@ function parkingReducer(state = initialState, action = {}) {
       return {
         ...state,
         searchFieldIsActived: action.newValue,
+      };
+
+    case SET_SEARCH_FIELD_ERROR:
+      return {
+        ...state,
+        searchFieldError: action.errorMessage,
       };
 
     default:

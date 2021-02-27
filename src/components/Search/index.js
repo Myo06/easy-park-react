@@ -31,21 +31,22 @@ const Search = ({
 
   const isLocked = classNames('', { lock: searchFieldIsLocked });
   const isActive = classNames('', { active: searchFieldIsActived });
+  const isError = classNames('', { error: searchFieldError });
 
   return (
     <form className="search" onSubmit={manageOnSubmitForm}>
-      <div className={`search__field ${isLocked} ${isActive}`}>
+      <div className={`search__field ${isLocked} ${isActive} ${isError}`}>
         <input
           id="search__inputId"
           placeholder={placeholder}
           type="text"
           value={searchInput}
           onChange={(event) => handleOnChangeSearchInput(event.currentTarget.value)}
-          onBlur={handleOnValidateSearchInput}
           onFocus={() => handleOnFocusSearchInput(true)}
+          onBlur={() => handleOnFocusSearchInput(false)}
         />
-        <label htmlFor="search__inputId" className={searchFieldError && 'error'}>
-          {searchFieldError || placeholder}
+        <label htmlFor="search__inputId">
+          { searchFieldError !== '' ? searchFieldError : placeholder }
         </label>
       </div>
     </form>

@@ -19,7 +19,7 @@ const Map = ({
     lng: -122.08427,
   };
 
-  const manageGoogleApiLoaded = ({map, maps}) => {
+  const manageGoogleApiLoaded = ({ map, maps }) => {
     handleOnGoogleApiLoaded(map, maps);
   };
 
