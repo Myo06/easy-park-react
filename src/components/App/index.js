@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Header from 'src/components/Header';
 import Search from 'src/containers/Search';
 import Map from 'src/containers/Map';
-import Footer from 'src/components/Footer';
 
 // == Import
 import './app.scss';
@@ -17,10 +16,17 @@ const App = ({
   defaultLocationIsLoaded,
 }) => {
   useEffect(() => {
+    // if the geolocation is not available
+    const geoError = () => {
+      // define Paris as default position
+      const parisLocation = { lat: 48.84, lng: 2.39 };
+      handleOnLoadApp(parisLocation);
+    };
+    // define the current user geolocation as the default position to center the googleMap
     navigator?.geolocation.getCurrentPosition(({ coords: { latitude: lat, longitude: lng } }) => {
       const currentUserPosition = { lat, lng };
       handleOnLoadApp(currentUserPosition);
-    });
+    }, geoError);
   }, []);
 
   return (
@@ -28,7 +34,6 @@ const App = ({
       <Header />
       <Search />
       {defaultLocationIsLoaded && <Map /> }
-      <Footer />
     </div>
   );
 };

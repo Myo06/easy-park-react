@@ -33,7 +33,8 @@ const Search = ({
     handleOnValidateSearchInput();
   };
 
-  const manageOnValidateAutoComplete = () => {
+  const manageOnValidateAutoComplete = (autocomplete) => {
+    handleOnChangeSearchInput(autocomplete.getPlace().name);
     handleOnValidateSearchInput();
   };
 
@@ -42,7 +43,6 @@ const Search = ({
       const options = {
         componentRestrictions: { country: 'fr' },
         fields: ['name'],
-        strictBounds: false,
       };
       const autocomplete = new maps.places.Autocomplete(searchInputRef.current, options);
       autocomplete.addListener('place_changed', () => manageOnValidateAutoComplete(autocomplete));
