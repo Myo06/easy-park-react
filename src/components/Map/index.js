@@ -18,6 +18,7 @@ const Map = ({
   const manageGoogleApiLoaded = ({ map, maps }) => {
     handleOnGoogleApiLoaded(map, maps);
   };
+
   return (
     <div className="map">
       <h2 className="map__title">Come Visit Us At Our Campus</h2>
@@ -29,8 +30,8 @@ const Map = ({
             inputtype: 'textquery',
           }}
           language="fr"
-          defaultCenter={defaultLocation}
-          defaultZoom={15}
+          center={defaultLocation}
+          defaultZoom={14}
           onGoogleApiLoaded={manageGoogleApiLoaded}
           yesIWantToUseGoogleMapApiInternals
         >

@@ -40,9 +40,7 @@ const googleMapMiddleware = (store) => (next) => (action) => {
                 lng: result.geometry.location.lng(),
               },
             }));
-            console.log(newLocation);
-            console.log(results);
-            
+            map.setCenter(newLocation[0].location);
             store.dispatch(setSearchFieldError(''));
             store.dispatch(setSearchInput(''));
             store.dispatch(saveLocations(newLocation));
