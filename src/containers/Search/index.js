@@ -19,6 +19,8 @@ const mapStateToProps = (state) => ({
   searchFieldError: state.parking.searchFieldError,
   searchFieldIsActived: state.parking.searchFieldIsActived,
   searchFieldIsLocked: state.parking.searchFieldIsLocked,
+  maps: state.googleMap.maps,
+  mapIsLoaded: state.googleMap.mapIsLoaded,
 });
 
 // === mapDispatchToProps

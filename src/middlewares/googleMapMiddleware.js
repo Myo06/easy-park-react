@@ -33,7 +33,7 @@ const googleMapMiddleware = (store) => (next) => (action) => {
         switch (status) {
           case OK: {
             const newLocation = results.map((result) => ({
-              place_id: result.formatted_address,
+              place_id: result.place_id,
               name: result.name,
               formatted_address: result.formatted_address,
               location: {

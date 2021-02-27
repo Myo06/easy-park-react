@@ -1,5 +1,5 @@
 // == Import npm
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -17,7 +17,11 @@ const Search = ({
   searchFieldError,
   searchFieldIsActived,
   searchFieldIsLocked,
+  maps,
+  mapIsLoaded,
 }) => {
+  const searchInputRef = useRef(null);
+  /* const autocomplete = useRef(null); */
   // placeholder or label text
   const placeholder = 'Search on map';
 
@@ -29,6 +33,22 @@ const Search = ({
     handleOnValidateSearchInput();
   };
 
+  const manageOnValidateAutoComplete = () => {
+    handleOnValidateSearchInput();
+  };
+
+  useEffect(() => {
+    if (mapIsLoaded) {
+      const options = {
+        componentRestrictions: { country: 'fr' },
+        fields: ['name'],
+        strictBounds: false,
+      };
+      const autocomplete = new maps.places.Autocomplete(searchInputRef.current, options);
+      autocomplete.addListener('place_changed', () => manageOnValidateAutoComplete(autocomplete));
+    }
+  }, [searchInput]);
+
   const isLocked = classNames('', { lock: searchFieldIsLocked });
   const isActive = classNames('', { active: searchFieldIsActived });
   const isError = classNames('', { error: searchFieldError });
@@ -37,6 +57,7 @@ const Search = ({
     <form className="search" onSubmit={manageOnSubmitForm}>
       <div className={`search__field ${isLocked} ${isActive} ${isError}`}>
         <input
+          ref={searchInputRef}
           id="search__inputId"
           placeholder={placeholder}
           type="text"
@@ -68,6 +89,10 @@ Search.propTypes = {
   searchFieldIsActived: PropTypes.bool.isRequired,
   // remains locked for the data loading
   searchFieldIsLocked: PropTypes.bool.isRequired,
+  // current googleMaps
+  maps: PropTypes.object.isRequired,
+  // when the map is loaded
+  mapIsLoaded: PropTypes.bool.isRequired,
 };
 
 // == Export
