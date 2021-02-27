@@ -2,6 +2,8 @@ import {
   SET_SEARCH_INPUT,
   TOGGLE_FIELD,
   SET_SEARCH_FIELD_ERROR,
+  SAVE_LOCATIONS,
+  SAVE_DEFAULT_LOCATION,
 } from 'src/actions/parking';
 
 const initialState = {
@@ -9,6 +11,9 @@ const initialState = {
   searchFieldError: '',
   searchFieldIsActived: false,
   searchFieldIsLocked: false,
+  locations: [],
+  defaultLocation: {},
+  defaultLocationIsLoaded: false,
 };
 
 function parkingReducer(state = initialState, action = {}) {
@@ -28,6 +33,19 @@ function parkingReducer(state = initialState, action = {}) {
       return {
         ...state,
         searchFieldError: action.errorMessage,
+      };
+
+    case SAVE_LOCATIONS:
+      return {
+        ...state,
+        locations: action.locations,
+      };
+
+    case SAVE_DEFAULT_LOCATION:
+      return {
+        ...state,
+        defaultLocation: action.location,
+        defaultLocationIsLoaded: true,
       };
 
     default:

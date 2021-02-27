@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-
 // === actions
 import {
   setMap,
@@ -9,6 +8,10 @@ import {
 import Map from 'src/components/Map';
 
 // === mapStateToProps
+const mapStateToProps = (state) => ({
+  locations: state.parking.locations,
+  defaultLocation: state.parking.defaultLocation,
+});
 
 // === mapDispatchToProps
 const mapDispatchToProps = (dispatch) => ({
@@ -16,4 +19,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 // === création de l'assistant
-export default connect(null, mapDispatchToProps)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

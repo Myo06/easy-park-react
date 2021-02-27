@@ -1,5 +1,6 @@
 // == Import npm
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 // == Import Components
 import Header from 'src/components/Header';
@@ -11,14 +12,33 @@ import Footer from 'src/components/Footer';
 import './app.scss';
 
 // == Composant
-const App = () => (
-  <div className="app">
-    <Header />
-    <Search />
-    <Map />
-    <Footer />
-  </div>
-);
+const App = ({
+  handleOnLoadApp,
+  defaultLocationIsLoaded,
+}) => {
+  useEffect(() => {
+    navigator?.geolocation.getCurrentPosition(({ coords: { latitude: lat, longitude: lng } }) => {
+      const currentUserPosition = { lat, lng };
+      handleOnLoadApp(currentUserPosition);
+    });
+  }, []);
+
+  return (
+    <div className="app">
+      <Header />
+      <Search />
+      {defaultLocationIsLoaded && <Map /> }
+      <Footer />
+    </div>
+  );
+};
+
+App.propTypes = {
+  // initialize the defaultLocation state
+  handleOnLoadApp: PropTypes.func.isRequired,
+  // waiting for the navigator.geolocation api
+  defaultLocationIsLoaded: PropTypes.bool.isRequired,
+};
 
 // == Export
 export default App;
