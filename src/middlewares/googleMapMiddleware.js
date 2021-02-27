@@ -7,8 +7,8 @@ import {
   toggleField,
   setSearchInput,
   setSearchFieldError,
+  saveLocations,
 } from 'src/actions/parking';
-import { saveLocations } from '../actions/parking';
 
 // === const
 // @https://developers.google.com/maps/documentation/javascript/reference/places-service#PlacesServiceStatus
@@ -34,15 +34,19 @@ const googleMapMiddleware = (store) => (next) => (action) => {
           case OK: {
             const newLocation = results.map((result) => ({
               place_id: result.formatted_address,
+              name: result.name,
               formatted_address: result.formatted_address,
               location: {
                 lat: result.geometry.location.lat(),
                 lng: result.geometry.location.lng(),
               },
             }));
+            // center the map to the first location
             map.setCenter(newLocation[0].location);
+            // reset error and input value
             store.dispatch(setSearchFieldError(''));
             store.dispatch(setSearchInput(''));
+            // save the locations to the store
             store.dispatch(saveLocations(newLocation));
           }
             break;

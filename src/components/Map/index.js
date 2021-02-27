@@ -18,11 +18,13 @@ const Map = ({
   const manageGoogleApiLoaded = ({ map, maps }) => {
     handleOnGoogleApiLoaded(map, maps);
   };
-
   return (
     <div className="map">
-      <h2 className="map__title">Come Visit Us At Our Campus</h2>
+      <div className="map__result">
+        {locations.length > 0 ? `${locations.length} parkings found` : ''}
+      </div>
       <div className="map__googleMap">
+        {/* @https://github.com/google-map-react/google-map-react */}
         <GoogleMapReact
           bootstrapURLKeys={{
             key: 'AIzaSyDGJxYP-vCDCkavOIR3GyDWxVVVziIu6vI',
@@ -31,20 +33,19 @@ const Map = ({
           }}
           language="fr"
           center={defaultLocation}
-          defaultZoom={14}
+          defaultZoom={13}
           onGoogleApiLoaded={manageGoogleApiLoaded}
           yesIWantToUseGoogleMapApiInternals
         >
-          { locations.length > 0 && (
-            locations.map((location) => (
-              <LocationPin
-                lat={location.location.lat}
-                lng={location.location.lng}
-                text={location.formatted_address}
-                key={location.place_id}
-              />
-            ))
-          )}
+          { locations.map((location) => (
+            <LocationPin
+              lat={location.location.lat}
+              lng={location.location.lng}
+              name={location.name}
+              address={location.formatted_address}
+              key={location.place_id}
+            />
+          ))}
         </GoogleMapReact>
       </div>
     </div>
@@ -62,9 +63,18 @@ Map.propTypes = {
   ).isRequired,
   // contain the current user position
   defaultLocation: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-  }).isRequired,
+    formatted_address: PropTypes.string,
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+  }),
+};
+
+Map.defaultProps = {
+  defaultLocation: {
+    formatted_address: '',
+    lat: 0,
+    lng: 0,
+  },
 };
 
 // == Export

@@ -4,10 +4,6 @@ import {
   setMap,
 } from 'src/actions/googleMap';
 
-import {
-  saveDefaultLocation,
-} from 'src/actions/parking';
-
 // === presentational component
 import Map from 'src/components/Map';
 
@@ -20,7 +16,6 @@ const mapStateToProps = (state) => ({
 // === mapDispatchToProps
 const mapDispatchToProps = (dispatch) => ({
   handleOnGoogleApiLoaded: (map, maps) => dispatch(setMap(map, maps)),
-  /* handleOnChangeMap: () => dispatch(saveDefaultLocation()), */
 });
 
 // === création de l'assistant

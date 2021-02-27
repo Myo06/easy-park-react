@@ -1,8 +1,7 @@
 @use 'src/styles/vars';
 
 .map {
-  .map__title {
-    text-transform: uppercase;
+  .map__result {
     font-size: 1rem;
     padding: 20px;
     padding-left: 10px;
@@ -15,10 +14,10 @@
   .locationPin {
     display: flex;
     align-items: center;
-    width: 180px;
     color: var(--main-blue);
     .locationPin__icon {
-      font-size: 4rem;
+      width: 2rem;
+      cursor: pointer;
     }
     .locationPin__text {
       font-size: 1.3em;
