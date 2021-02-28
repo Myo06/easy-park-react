@@ -4,7 +4,8 @@ import {
 } from 'src/actions/googleMap';
 
 import {
-  toggleField,
+  toggleSearchField,
+  toggleLockSearchField,
   setSearchInput,
   setSearchFieldError,
   saveLocations,
@@ -41,6 +42,8 @@ const googleMapMiddleware = (store) => (next) => (action) => {
                 lng: result.geometry.location.lng(),
               },
             }));
+            // unlock the search field
+            store.dispatch(toggleLockSearchField(false));
             // center the map to the first location
             map.setCenter(newLocation[0].location);
             // reset error and input value
@@ -52,19 +55,28 @@ const googleMapMiddleware = (store) => (next) => (action) => {
             break;
           case ZERO_RESULTS:
             store.dispatch(setSearchFieldError('we don\'t found any parking in this city'));
+            store.dispatch(toggleLockSearchField(false));
             break;
           case OVER_QUERY_LIMIT || REQUEST_DENIED || INVALID_REQUEST || UNKNOWN_ERROR: {
             store.dispatch(setSearchFieldError('error : please try again later'));
+            // unlock the search field
+            store.dispatch(toggleLockSearchField(false));
             break;
           }
           default:
-            store.dispatch(toggleField(false));
+            // unlock the search field
+            store.dispatch(toggleLockSearchField(false));
+            // unactive the search field
+            store.dispatch(toggleSearchField(false));
             store.dispatch(setSearchInput(''));
         }
       };
 
       // if the search fied is not empty use the google map placeServive api
       if (store.getState().parking.searchInput !== '') {
+        // lock the search field
+        store.dispatch(toggleLockSearchField(true));
+
         // query : required -> google search text
         // types : optional -> filter the google search @https://developers.google.com/maps/documentation/places/web-service/supported_types
         const request = {

@@ -10,7 +10,7 @@ import logo from 'src/assets/img/logo-200.png';
 // == Composant
 const Header = () => (
   <header className="header">
-    <img className="header__logo" src={logo} alt="easy park logo"/>
+    <img className="header__logo" src={logo} alt="easy park logo" />
     <div className="header__titles">
       <h1 className="titles__name">
         Easy Park

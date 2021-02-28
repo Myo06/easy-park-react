@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 // == Import Components
+import SearchIcon from 'src/components/Custom/SearchIcon';
 
 // == Import
 import './search.scss';
@@ -21,18 +22,24 @@ const Search = ({
   mapIsLoaded,
 }) => {
   const searchInputRef = useRef(null);
-  /* const autocomplete = useRef(null); */
   // placeholder or label text
   const placeholder = 'Search on map';
 
-  // searchFieldIsActived to false
-  // request google api
-  // searchFieldIsLocked to true untill the end of the api request to google
+  /**
+   * Request the textsearch googleApi
+   * searchFieldIsActived to false && searchFieldIsLocked to true
+  */
   const manageOnSubmitForm = (event) => {
     event.preventDefault();
     handleOnValidateSearchInput();
   };
 
+  /**
+   * Request the textsearch googleApi
+   * @param {GoogleMap Autocomplete} - @https://developers.google.com/maps/documentation/javascript/reference/places-widget#Autocomplete.constructor
+   * udapte the searchInput
+   * searchFieldIsActived to false && searchFieldIsLocked to true
+  */
   const manageOnValidateAutoComplete = (autocomplete) => {
     handleOnChangeSearchInput(autocomplete.getPlace().name);
     handleOnValidateSearchInput();
@@ -44,18 +51,24 @@ const Search = ({
         componentRestrictions: { country: 'fr' },
         fields: ['name'],
       };
+      // @https://developers.google.com/maps/documentation/javascript/reference/places-widget#Autocomplete.constructor
       const autocomplete = new maps.places.Autocomplete(searchInputRef.current, options);
       autocomplete.addListener('place_changed', () => manageOnValidateAutoComplete(autocomplete));
     }
   }, [searchInput]);
 
+  // === cssClass
   const isLocked = classNames('', { lock: searchFieldIsLocked });
-  const isActive = classNames('', { active: searchFieldIsActived });
+  const isActive = classNames('', { active: searchFieldIsActived || searchFieldError });
   const isError = classNames('', { error: searchFieldError });
 
   return (
     <form className="search" onSubmit={manageOnSubmitForm}>
       <div className={`search__field ${isLocked} ${isActive} ${isError}`}>
+        <SearchIcon
+          handleOnClick={handleOnValidateSearchInput}
+          isLoading={searchFieldIsLocked}
+        />
         <input
           ref={searchInputRef}
           id="search__inputId"
@@ -65,6 +78,7 @@ const Search = ({
           onChange={(event) => handleOnChangeSearchInput(event.currentTarget.value)}
           onFocus={() => handleOnFocusSearchInput(true)}
           onBlur={() => handleOnFocusSearchInput(false)}
+          maxLength="65"
         />
         <label htmlFor="search__inputId">
           { searchFieldError !== '' ? searchFieldError : placeholder }

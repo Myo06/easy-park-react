@@ -1,0 +1,52 @@
+@use 'src/styles/vars';
+
+.searchIcon {
+  width: vars.$iconWidth;
+  position: absolute;
+  right: #{vars.$iconWidth};
+  top: 7px;
+  .searchIcon__icon {
+    width: 30px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .searchIcon__loader {
+    display: inline-block;
+    position: relative;
+    width: vars.$iconWidth;
+    height: vars.$iconWidth;
+    & div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: vars.$iconWidth;
+      height: vars.$iconWidth;
+      margin: 8px;
+      border: 8px solid #fff;
+      border-radius: 50%;
+      animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: #aaa transparent transparent transparent;
+    }
+    & div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    & div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    & div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+  }
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
