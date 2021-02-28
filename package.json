@@ -6,7 +6,9 @@
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint --fix src/**/*.js",
     "clean": "rm -rf dist",
-    "clean:all": "rm -rf dist node_modules yarn.lock package-lock.json"
+    "clean:all": "rm -rf dist node_modules yarn.lock package-lock.json",
+    "test": "cross-env NODE_PATH=./ mocha --require tests/.setup.js tests/**/*.test.js",
+    "test:watch": "cross-env NODE_PATH=./ mocha --watch --require tests/.setup.js tests/**/*.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
@@ -14,6 +16,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
+    "@babel/register": "^7.13.8",
     "@babel/runtime-corejs3": "^7.13.7",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
@@ -23,6 +26,8 @@
     "cross-env": "^7.0.2",
     "css-loader": "^3.6.0",
     "cssnano": "^4.1.10",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^7.4.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-import-resolver-alias": "^1.1.2",
@@ -32,6 +37,7 @@
     "eslint-plugin-react-hooks": "^4.0.5",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "ignore-styles": "^5.0.1",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",

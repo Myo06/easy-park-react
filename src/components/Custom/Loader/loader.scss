@@ -7,7 +7,7 @@
   position: absolute;
   z-index: 1;
   top: 50vh;
-  left: calc(#{vars.$appWidth} / 1.6);
+  left: 40%;
   .car {
     &__body {
       animation: shake 0.2s ease-in-out infinite alternate;

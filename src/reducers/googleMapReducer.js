@@ -15,7 +15,7 @@ function googleMapReducer(state = initialState, action = {}) {
         ...state,
         map: action.map,
         maps: action.maps,
-        googleMapIsLoaded: true,
+        googleMapIsLoaded: false,
       };
     default:
       return state;
