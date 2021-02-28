@@ -57,7 +57,13 @@ const googleMapMiddleware = (store) => (next) => (action) => {
             store.dispatch(setSearchFieldError('we don\'t found any parking in this city'));
             store.dispatch(toggleLockSearchField(false));
             break;
-          case OVER_QUERY_LIMIT || REQUEST_DENIED || INVALID_REQUEST || UNKNOWN_ERROR: {
+          case OVER_QUERY_LIMIT: {
+            store.dispatch(setSearchFieldError('error : The search count limit has been exceeded, please try again later'));
+            // unlock the search field
+            store.dispatch(toggleLockSearchField(false));
+            break;
+          }
+          case REQUEST_DENIED || INVALID_REQUEST || UNKNOWN_ERROR: {
             store.dispatch(setSearchFieldError('error : please try again later'));
             // unlock the search field
             store.dispatch(toggleLockSearchField(false));
