@@ -27,7 +27,6 @@ const googleMapMiddleware = (store) => (next) => (action) => {
         map,
         maps,
       } = store.getState().googleMap;
-
       // call to display the api maps result error a message if is required
       // @https://developers.google.com/maps/documentation/javascript/places#place_search_responses
       const callback = (results, status) => {
@@ -77,7 +76,6 @@ const googleMapMiddleware = (store) => (next) => (action) => {
             store.dispatch(setSearchInput(''));
         }
       };
-
       // if the search fied is not empty use the google map placeServive api
       if (store.getState().parking.searchInput !== '') {
         // lock the search field
@@ -89,7 +87,6 @@ const googleMapMiddleware = (store) => (next) => (action) => {
           query: store.getState().parking.searchInput,
           types: ['parking'],
         };
-
         // @https://developers.google.com/maps/documentation/javascript/reference/places-service
         const searchResult = new maps.places.PlacesService(map);
         // consumne the google map api : search the request and return the result to the callback
@@ -99,7 +96,6 @@ const googleMapMiddleware = (store) => (next) => (action) => {
       else {
         store.dispatch(setSearchFieldError('Please, enter a city name'));
       }
-
       next(action);
       break;
     }
