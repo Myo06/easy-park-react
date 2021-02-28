@@ -1,8 +1,9 @@
 @use 'src/styles/vars';
 
 .app {
-  max-width: 700px;
+  max-width: vars.$appWidth;
   margin: 0 auto;
   background-color: vars.$backgroundColor;
   box-shadow: 1px 1px 5px #eee;
+  min-height: 100vh;
 }

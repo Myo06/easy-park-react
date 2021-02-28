@@ -11,6 +11,7 @@ import Map from 'src/components/Map';
 const mapStateToProps = (state) => ({
   locations: state.parking.locations,
   defaultLocation: state.parking.defaultLocation,
+  googleMapIsLoaded: state.googleMap.googleMapIsLoaded,
 });
 
 // === mapDispatchToProps

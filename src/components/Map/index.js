@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
 
 // == Import Components
+import Loader from 'src/components/Custom/Loader';
 import LocationPin from './LocationPin';
 
 // == Import
@@ -14,6 +15,7 @@ const Map = ({
   handleOnGoogleApiLoaded,
   locations,
   defaultLocation,
+  googleMapIsLoaded,
 }) => {
   const manageGoogleApiLoaded = ({ map, maps }) => {
     handleOnGoogleApiLoaded(map, maps);
@@ -24,6 +26,7 @@ const Map = ({
         {locations.length > 0 ? `${locations.length} parkings found` : ''}
       </div>
       <div className="map__googleMap">
+        { !googleMapIsLoaded && <Loader /> }
         {/* @https://github.com/google-map-react/google-map-react */}
         <GoogleMapReact
           bootstrapURLKeys={{
@@ -67,6 +70,8 @@ Map.propTypes = {
     lat: PropTypes.number,
     lng: PropTypes.number,
   }),
+  // set to true when the google map is loader
+  googleMapIsLoaded: PropTypes.bool.isRequired,
 };
 
 Map.defaultProps = {

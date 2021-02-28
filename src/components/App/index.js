@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Header from 'src/components/Header';
 import Search from 'src/containers/Search';
 import Map from 'src/containers/Map';
+import Loader from 'src/components/Custom/Loader';
 
 // == Import
 import './app.scss';
@@ -33,7 +34,7 @@ const App = ({
     <div className="app">
       <Header />
       <Search />
-      {defaultLocationIsLoaded && <Map /> }
+      {defaultLocationIsLoaded ? <Map /> : <Loader />}
     </div>
   );
 };

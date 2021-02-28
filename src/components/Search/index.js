@@ -19,7 +19,7 @@ const Search = ({
   searchFieldIsActived,
   searchFieldIsLocked,
   maps,
-  mapIsLoaded,
+  googleMapIsLoaded,
 }) => {
   const searchInputRef = useRef(null);
   // placeholder or label text
@@ -46,7 +46,7 @@ const Search = ({
   };
 
   useEffect(() => {
-    if (mapIsLoaded) {
+    if (googleMapIsLoaded) {
       const options = {
         componentRestrictions: { country: 'fr' },
         fields: ['name'],
@@ -55,7 +55,7 @@ const Search = ({
       const autocomplete = new maps.places.Autocomplete(searchInputRef.current, options);
       autocomplete.addListener('place_changed', () => manageOnValidateAutoComplete(autocomplete));
     }
-  }, [searchInput]);
+  }, [searchFieldIsActived]);
 
   // === cssClass
   const isLocked = classNames('', { lock: searchFieldIsLocked });
@@ -106,7 +106,7 @@ Search.propTypes = {
   // current googleMaps
   maps: PropTypes.object.isRequired,
   // when the map is loaded
-  mapIsLoaded: PropTypes.bool.isRequired,
+  googleMapIsLoaded: PropTypes.bool.isRequired,
 };
 
 // == Export

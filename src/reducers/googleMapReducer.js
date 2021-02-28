@@ -5,7 +5,7 @@ import {
 const initialState = {
   map: {},
   maps: {},
-  mapIsLoaded: false,
+  googleMapIsLoaded: false,
 };
 
 function googleMapReducer(state = initialState, action = {}) {
@@ -15,7 +15,7 @@ function googleMapReducer(state = initialState, action = {}) {
         ...state,
         map: action.map,
         maps: action.maps,
-        mapIsLoaded: true,
+        googleMapIsLoaded: true,
       };
     default:
       return state;
