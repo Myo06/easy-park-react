@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // === actions
 import {
   setSearchInput,
-  toggleSearchField,
+  toggleActiveSearchField,
 } from 'src/actions/parking';
 
 import {
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleOnChangeSearchInput: (searchInputValue) => dispatch(setSearchInput(searchInputValue)),
   handleOnValidateSearchInput: () => dispatch(fetchParkings()),
-  handleOnFocusSearchInput: (toTrue) => dispatch(toggleSearchField(toTrue)),
+  handleOnFocusSearchInput: (toTrue) => dispatch(toggleActiveSearchField(toTrue)),
 });
 
 // === création de l'assistant

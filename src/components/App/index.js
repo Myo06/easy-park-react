@@ -34,7 +34,7 @@ const App = ({
     <div className="app">
       <Header />
       <Search />
-      {defaultLocationIsLoaded ? <Map /> : <Loader />}
+      { !defaultLocationIsLoaded ? <Loader /> : <Map /> }
     </div>
   );
 };

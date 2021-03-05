@@ -1,30 +1,60 @@
-
 // === import npm
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { spy } from 'sinon';
 
 // === import component
 import Search from 'src/components/Search';
 
-
 describe('<Search />', () => {
-  it('Uses title given as props', () => {
-    const titleValue = 'pizza';
+  const placeholder = 'Search on map';
+  const searchInput = '';
+  const handleOnChangeSearchInput = spy();
+  const handleOnValidateSearchInput = spy();
+  const handleOnFocusSearchInput = spy();
+  const maps = {};
+  const googleMapIsLoaded = false;
+  let searchFieldError = 'error';
+  const searchFieldIsActived = false;
+  const searchFieldIsLocked = false;
 
-    // on fait le rendu du composant
-    const wrapper = shallow(<Search
-      title={titleValue}
-      thumbnail="img1.png"
-      difficulty="facile"
-      order={1}
-      isFavorite={false}
-    />);
+  it('have a label with error', () => {
+    const wrapper = shallow(
+      <Search
+        searchInput={searchInput}
+        searchFieldError={searchFieldError}
+        maps={maps}
+        handleOnChangeSearchInput={handleOnChangeSearchInput}
+        handleOnValidateSearchInput={handleOnValidateSearchInput}
+        handleOnFocusSearchInput={handleOnFocusSearchInput}
+        googleMapIsLoaded={googleMapIsLoaded}
+        searchFieldIsActived={searchFieldIsActived}
+        searchFieldIsLocked={searchFieldIsLocked}
+      />,
+    );
+    const label = wrapper.find('label');
+    expect(label).to.have.length(1);
+    expect(label.text()).to.equal(searchFieldError);
+  });
 
-    // rechercher les h2 et verifier qu'il est uniquem
-    const h2Elements = wrapper.find('h2');
-    expect(h2Elements).to.have.length(1);
-    // verifier que le titleValue est bien le contenu du h2
-    expect(h2Elements.text()).equal(titleValue);
+  it('have a label without error', () => {
+    searchFieldError = '';
+    const wrapper = shallow(
+      <Search
+        searchInput={searchInput}
+        searchFieldError={searchFieldError}
+        maps={maps}
+        handleOnChangeSearchInput={handleOnChangeSearchInput}
+        handleOnValidateSearchInput={handleOnValidateSearchInput}
+        handleOnFocusSearchInput={handleOnFocusSearchInput}
+        googleMapIsLoaded={googleMapIsLoaded}
+        searchFieldIsActived={searchFieldIsActived}
+        searchFieldIsLocked={searchFieldIsLocked}
+      />,
+    );
+    const label = wrapper.find('label');
+    expect(label).to.have.length(1);
+    expect(label.text()).to.equal(placeholder);
   });
 });

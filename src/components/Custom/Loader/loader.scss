@@ -8,7 +8,9 @@
   z-index: 1;
   top: 50vh;
   left: 40%;
+  flex-direction: column;
   .car {
+    margin-top: vars.$gutter;
     &__body {
       animation: shake 0.2s ease-in-out infinite alternate;
     }

@@ -3,7 +3,7 @@
 .app {
   max-width: vars.$appWidth;
   margin: 0 auto;
-  background-color: vars.$backgroundColor;
+  background-color: transparent;
   border: 1px solid vars.$primary;;
   box-shadow: 1px 1px 5px vars.$primary;
   min-height: 100vh;

@@ -4,11 +4,12 @@ import {
 } from 'src/actions/googleMap';
 
 import {
-  toggleSearchField,
+  toggleActiveSearchField,
   toggleLockSearchField,
   setSearchInput,
   setSearchFieldError,
   saveLocations,
+  addCacheLocations,
 } from 'src/actions/parking';
 
 // === const
@@ -29,9 +30,10 @@ const googleMapMiddleware = (store) => (next) => (action) => {
       } = store.getState().googleMap;
       // call to display the api maps result error a message if is required
       // @https://developers.google.com/maps/documentation/javascript/places#place_search_responses
-      const callback = (results, status) => {
+      const callback = (results, status, pagination) => {
         switch (status) {
           case OK: {
+            const { cacheLocations } = store.getState().parking;
             const newLocation = results.map((result) => ({
               place_id: result.place_id,
               name: result.name,
@@ -41,17 +43,25 @@ const googleMapMiddleware = (store) => (next) => (action) => {
                 lng: result.geometry.location.lng(),
               },
             }));
-            // unlock the search field
-            store.dispatch(toggleLockSearchField(false));
-            // center the map to the first location
-            map.setCenter(newLocation[0].location);
-            // reset error and input value
-            store.dispatch(setSearchFieldError(''));
-            store.dispatch(setSearchInput(''));
-            // save the locations to the store
-            store.dispatch(saveLocations(newLocation));
-          }
+            const result = [...cacheLocations, ...newLocation];
+
+            if (pagination.hasNextPage) {
+              store.dispatch(addCacheLocations(result));
+              pagination.nextPage();
+            }
+            else {
+              // unlock the search field
+              store.dispatch(toggleLockSearchField(false));
+              // center the map to the first location
+              map.setCenter(result[0].location);
+              // reset error and input value
+              store.dispatch(setSearchFieldError(''));
+              store.dispatch(setSearchInput(''));
+              // save the locations to the store
+              store.dispatch(saveLocations(result));
+            }
             break;
+          }
           case ZERO_RESULTS:
             store.dispatch(setSearchFieldError('we don\'t found any parking in this city'));
             store.dispatch(toggleLockSearchField(false));
@@ -72,7 +82,7 @@ const googleMapMiddleware = (store) => (next) => (action) => {
             // unlock the search field
             store.dispatch(toggleLockSearchField(false));
             // unactive the search field
-            store.dispatch(toggleSearchField(false));
+            store.dispatch(toggleActiveSearchField(false));
             store.dispatch(setSearchInput(''));
         }
       };

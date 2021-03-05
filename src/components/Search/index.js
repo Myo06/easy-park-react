@@ -42,7 +42,6 @@ const Search = ({
   */
   const manageOnValidateAutoComplete = (autocomplete) => {
     handleOnChangeSearchInput(autocomplete.getPlace().name);
-    handleOnValidateSearchInput();
   };
 
   useEffect(() => {
@@ -58,7 +57,7 @@ const Search = ({
   }, [searchFieldIsActived]);
 
   // === cssClass
-  const isLocked = classNames('', { lock: searchFieldIsLocked });
+  const isLocked = classNames('', { lock: searchFieldIsLocked || !googleMapIsLoaded });
   const isActive = classNames('', { active: searchFieldIsActived || searchFieldError });
   const isError = classNames('', { error: searchFieldError });
 
