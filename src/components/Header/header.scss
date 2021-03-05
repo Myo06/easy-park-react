@@ -1,25 +1,20 @@
 @use 'src/styles/vars';
 
 .header {
-  height: 6rem;
   display: flex;
-  align-items: center;
-  padding: vars.$gutter;
-  margin-bottom: vars.$gutter;
-  background-color: vars.$secondary;
-  opacity: 0.6;
-  box-shadow: 1px 1px 5px vars.$primary;
-  border-radius: 2%;
+  background-color: transparent;
+  justify-content: space-evenly;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  text-shadow: 1px 1px 2px lighten(vars.$primary, 40);
   color: vars.$primary;
+  height: 7rem;
+  align-items: center;
   .header__logo {
-    width: 45px;
+    width: 75px;
+    margin-right: vars.$gutter;
   }
-  .header__titles {
+  .header__slogan {
     padding: vars.$gutter;
-    .titles__name {
-      margin-bottom: vars.$gutter / 2 ;
-    }
   }
 }

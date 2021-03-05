@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
+import classNames from 'classnames';
 
 // == Import Components
 import Loader from 'src/components/Custom/Loader';
@@ -20,12 +21,16 @@ const Map = ({
   const manageGoogleApiLoaded = ({ map, maps }) => {
     handleOnGoogleApiLoaded(map, maps);
   };
+
+  // transition to display the location count result
+  const resultCss = classNames('map__result', { hasResult: locations.length > 0 });
+  const googleMapCss = classNames('map__googleMap', { hasResult: locations.length > 0 });
   return (
     <div className="map">
-      <div className="map__result">
+      <div className={resultCss}>
         {locations.length > 0 ? `${locations.length} parkings found` : ''}
       </div>
-      <div className="map__googleMap">
+      <div className={googleMapCss}>
         { !googleMapIsLoaded && <Loader /> }
         {/* @https://github.com/google-map-react/google-map-react */}
         <GoogleMapReact

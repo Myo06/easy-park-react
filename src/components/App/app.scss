@@ -3,8 +3,7 @@
 .app {
   max-width: vars.$appWidth;
   margin: 0 auto;
-  background-color: transparent;
-  border: 1px solid vars.$primary;;
+  background-color: #{vars.$secondary}88;
   box-shadow: 1px 1px 5px vars.$primary;
   min-height: 100vh;
 }
