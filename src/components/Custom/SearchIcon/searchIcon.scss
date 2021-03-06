@@ -5,10 +5,10 @@
   position: absolute;
   top: calc(50% - #{vars.$iconWidth}/2);
   right: 1.2rem;
+  z-index: 1;
   .searchIcon__icon {
     width: vars.$iconWidth;
     cursor: pointer;
-    z-index: 1;
   }
   .searchIcon__loader {
     display: inline-block;
