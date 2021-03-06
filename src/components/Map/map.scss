@@ -1,16 +1,16 @@
 @use 'src/styles/vars';
 
 .map {
+  position: relative;
   .map__result {
     font-size: 1rem;
-    padding: 0px;
-    padding-left: 10px;
     text-align: center;
     color: vars.$primary;
     font-weight: bold;
+    line-height: 1.5vh;
     &.hasResult {
-      padding: 20px;
-      transition: padding 0.6s;
+      padding: 1.5vh;
+      transition: height 0.6s;
     }
   }
   .map__googleMap {
@@ -18,20 +18,20 @@
     height: 80vh;
     overflow: hidden;
     &.hasResult {
-      height: 73.35vh;
-      transition: padding 0.6s;
+      height: 75.5vh;
+      transition: height 0.6s;
+    }
+    .locationPin {
+      display: flex;
+      align-items: center;
+      .locationPin__icon {
+        width: 2rem;
+        cursor: pointer;
+      }
+      .locationPin__text {
+        font-size: 1.3em;
+      }
     }
   }
-  .locationPin {
-    display: flex;
-    align-items: center;
-    color: var(--main-blue);
-    .locationPin__icon {
-      width: 2rem;
-      cursor: pointer;
-    }
-    .locationPin__text {
-      font-size: 1.3em;
-    }
-  }
+
 }

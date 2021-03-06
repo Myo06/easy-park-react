@@ -3,9 +3,9 @@
 
 body {
   font-family: vars.$fontFamily;
-  background-color: #eee;
+  background-color: vars.$secondary;
   font-size: vars.$fontSize;
-  background: url(../assets/img/background.jpg);
+  background-image: url(../assets/img/background.jpg);
   background-size: cover;
-  background-position: right;
+  background-position: center;
 }

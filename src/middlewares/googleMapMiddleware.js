@@ -12,6 +12,11 @@ import {
   addCacheLocations,
 } from 'src/actions/parking';
 
+// === utils
+import {
+  getCenterLocation,
+} from 'src/utils';
+
 // === const
 // @https://developers.google.com/maps/documentation/javascript/reference/places-service#PlacesServiceStatus
 const OK = 'OK';
@@ -53,7 +58,7 @@ const googleMapMiddleware = (store) => (next) => (action) => {
               // unlock the search field
               store.dispatch(toggleLockSearchField(false));
               // center the map to the first location
-              map.setCenter(result[0].location);
+              map.setCenter(getCenterLocation(result));
               // reset error and input value
               store.dispatch(setSearchFieldError(''));
               store.dispatch(setSearchInput(''));

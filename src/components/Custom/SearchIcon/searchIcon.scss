@@ -3,13 +3,10 @@
 .searchIcon {
   width: vars.$iconWidth;
   position: absolute;
-  right: #{vars.$iconWidth};
-  top: 7px;
+  top: calc(50% - #{vars.$iconWidth}/2);
+  right: 1.2rem;
   .searchIcon__icon {
-    width: 30px;
-    position: absolute;
-    top: 5px;
-    left: 5px;
+    width: vars.$iconWidth;
     cursor: pointer;
     z-index: 1;
   }
@@ -24,11 +21,10 @@
       position: absolute;
       width: vars.$iconWidth;
       height: vars.$iconWidth;
-      margin: 8px;
-      border: 8px solid #fff;
+      border: 8px solid vars.$secondary;
       border-radius: 50%;
       animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-color: #aaa transparent transparent transparent;
+      border-color: vars.$primary transparent transparent transparent;
     }
     & div:nth-child(1) {
       animation-delay: -0.45s;
