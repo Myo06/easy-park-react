@@ -6,18 +6,18 @@ import PropTypes from 'prop-types';
 
 // == Import
 import './searchIcon.scss';
-import searchIcon from 'src/assets/img/searchIcon-48.png';
 
 // == Composant
 const SearchIcon = ({
   handleOnClick,
   isLoading,
+  icon,
 }) => (
   <div className="searchIcon">
     { !isLoading && (
       <img
         className="searchIcon__icon"
-        src={searchIcon}
+        src={icon}
         alt="easy park logo"
         onClick={handleOnClick}
       />
@@ -36,6 +36,8 @@ SearchIcon.propTypes = {
   handleOnClick: PropTypes.func.isRequired,
   // display the loader
   isLoading: PropTypes.bool.isRequired,
+  // icon img
+  icon: PropTypes.string.isRequired,
 };
 
 // == Export

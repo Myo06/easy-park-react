@@ -8,6 +8,7 @@ import SearchIcon from 'src/components/Custom/SearchIcon';
 
 // == Import
 import './search.scss';
+import searchIcon from 'src/assets/img/searchIcon-48.png';
 
 // == Compenents
 const Search = ({
@@ -67,6 +68,7 @@ const Search = ({
         <SearchIcon
           handleOnClick={handleOnValidateSearchInput}
           isLoading={searchFieldIsLocked}
+          icon={searchIcon}
         />
         <input
           ref={searchInputRef}
