@@ -5,7 +5,12 @@ import parkingIcon from 'src/assets/img/parkingIcon-48.png';
 
 const LocationPin = ({ name, address }) => (
   <div className="locationPin">
-    <img src={parkingIcon} className="locationPin__icon" alt="parking icon" title={`${name} - ${address}`} />
+    <img
+      className="locationPin__icon"
+      src={parkingIcon}
+      alt="parking icon"
+      title={`${name} - ${address}`}
+    />
   </div>
 );
 
