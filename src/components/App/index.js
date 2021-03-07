@@ -1,19 +1,50 @@
 // == Import npm
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+// == Import Components
+import Header from 'src/components/Header';
+import Search from 'src/containers/Search';
+import Map from 'src/containers/Map';
+import Loader from 'src/components/Custom/Loader';
 
 // == Import
-import store from 'src/store';
 import './app.scss';
 
 // == Composant
-const App = () => (
-  <Provider store={store}>
+const App = ({
+  handleOnLoadApp,
+  defaultLocationIsLoaded,
+}) => {
+  useEffect(() => {
+    // if the geolocation is not available
+    const geoError = () => {
+      // define Paris as default position
+      const parisLocation = { lat: 48.84, lng: 2.39 };
+      handleOnLoadApp(parisLocation);
+    };
+    // define the current user geolocation as the default position to center the googleMap
+    navigator?.geolocation.getCurrentPosition(({ coords: { latitude: lat, longitude: lng } }) => {
+      const currentUserPosition = { lat, lng };
+      handleOnLoadApp(currentUserPosition);
+    }, geoError);
+  }, []);
+
+  return (
     <div className="app">
-      <h1>Composant : App</h1>
+      <Header />
+      <Search />
+      { !defaultLocationIsLoaded ? <Loader /> : <Map /> }
     </div>
-  </Provider>
-);
+  );
+};
+
+App.propTypes = {
+  // initialize the defaultLocation state
+  handleOnLoadApp: PropTypes.func.isRequired,
+  // waiting for the navigator.geolocation api
+  defaultLocationIsLoaded: PropTypes.bool.isRequired,
+};
 
 // == Export
 export default App;
